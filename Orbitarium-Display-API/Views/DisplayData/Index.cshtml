@@ -1,0 +1,18 @@
+﻿@page "/"
+@model Orbitarium_Display_API.Models.DisplayData
+
+@{
+}
+
+<h1>Display Data</h1>
+
+@if(ViewBag.Valid) {
+    <h2>@ViewBag.PopulationUnderWater</h2>
+    <h2>@ViewBag.CO2ppm</h2>
+    <h2>@ViewBag.TemperatureC</h2> 
+    <h2>@ViewBag.Year</h2>
+    <h2>@ViewBag.SeaLevel</h2>
+}
+else {
+    <h2>No data</h2>
+}
