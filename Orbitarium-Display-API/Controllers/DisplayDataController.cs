@@ -47,23 +47,14 @@ public class DisplayDataController : Controller
     {
         try
         {
-            ViewBag.PopulationUnderWater = GetLast()!.PopulationUnderWater;
-            ViewBag.TemperatureC = GetLast()!.TemperatureC;
-            ViewBag.Year = GetLast()!.Year;
-            ViewBag.CO2ppm = GetLast()!.CO2ppm;
-            ViewBag.SeaLevel = GetLast()!.SeaLevel;
+            ViewBag.PopulationUnderWater = GetLast()?.PopulationUnderWater ?? 0;
+            ViewBag.TemperatureC = GetLast()?.TemperatureC ?? 0;
+            ViewBag.Year = GetLast()?.Year ?? 0;
+            ViewBag.CO2ppm = GetLast()?.CO2ppm ?? 0;
+            ViewBag.SeaLevel = GetLast()?.SeaLevel ?? 0;
             ViewBag.Valid = true;
         }
-        catch (NullReferenceException e)
-        {
-            ViewBag.PopulationUnderWater = 0;
-            ViewBag.TemperatureC = 0;
-            ViewBag.Year = 0;
-            ViewBag.CO2ppm = 0;
-            ViewBag.SeaLevel = 0;
-            ViewBag.Valid = false;
-        }
-        catch (InvalidOperationException e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
