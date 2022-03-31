@@ -3,16 +3,29 @@
 
 @{
 }
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Orbiarium Data</title>
+        <link href="@Url.Content("~/css/normalize.css")" rel="stylesheet" type="text/css"/>
+        <link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+    <h1>Display Data</h1>
 
-<h1>Display Data</h1>
-
-@if(ViewBag.Valid) {
-    <h2>@ViewBag.PopulationUnderWater</h2>
-    <h2>@ViewBag.CO2ppm</h2>
-    <h2>@ViewBag.TemperatureC</h2> 
-    <h2>@ViewBag.Year</h2>
-    <h2>@ViewBag.SeaLevel</h2>
-}
-else {
-    <h2>No data</h2>
-}
+    @if (ViewBag.Valid)
+    {
+        <div class="grid-horizontal">
+            <section>@ViewBag.PopulationUnderWater</section>
+            <section>@ViewBag.CO2ppm</section>
+            <section>@ViewBag.TemperatureC</section>
+            <section>@ViewBag.Year</section>
+            <section>@ViewBag.SeaLevel</section>
+        </div>
+    }
+    else
+    {
+        <h2>No data</h2>
+    }
+    </body>
+</html>
