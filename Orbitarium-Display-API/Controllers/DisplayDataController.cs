@@ -4,7 +4,7 @@ using Orbitarium_Display_API.Models;
 namespace Orbitarium_Display_API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class DisplayDataController : Controller
 {
     private readonly ILogger<DisplayDataController> _logger;
@@ -16,7 +16,7 @@ public class DisplayDataController : Controller
         _context = context;
     }
 
-    /*
+    
     [HttpGet(Name = "GetDisplayData")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public DisplayData? Get()
@@ -30,7 +30,7 @@ public class DisplayDataController : Controller
             Console.WriteLine(e);
             return null;
         }
-    }*/
+    }
     
     
     [HttpPost(Name = "PostTemperature")]
@@ -50,7 +50,7 @@ public class DisplayDataController : Controller
             ViewBag.PopulationUnderWater = GetLast()?.PopulationUnderWater ?? 0;
             ViewBag.TemperatureC = GetLast()?.TemperatureC ?? 0;
             ViewBag.Year = GetLast()?.Year ?? 0;
-            ViewBag.CO2ppm = GetLast()?.CO2ppm ?? 0;
+            ViewBag.CO2ppm = GetLast()?.Co2ppm ?? 0;
             ViewBag.SeaLevel = GetLast()?.SeaLevel ?? 0;
             ViewBag.Valid = true;
         }

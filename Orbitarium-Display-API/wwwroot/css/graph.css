@@ -4,7 +4,11 @@
     overflow: hidden;
 }
 .graph-fill {
-    position: absolute;
-    transform-origin: bottom;
-    transform: scaleY(10%);
+    display: inline-flex;
+    position: relative;
+    transform-origin: bottom;    
+    transition: .3s ease-in-out;
+}
+.graph-title {
+    
 }
