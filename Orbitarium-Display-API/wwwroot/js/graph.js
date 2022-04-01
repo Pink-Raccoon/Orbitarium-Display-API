@@ -27,8 +27,8 @@ class Graph {
     }
 
     set graphValue(newValue) {
-        if (document.getElementById(this.id)) document.getElementById(this.id).getElementsByClassName('graph-value')[0].innerHTML = this.graphValue;
-            this.transformY = this.mapBetween(newValue,0,100,this.min,this.max)
+        if (document.getElementById(this.id)) document.getElementById(this.id).getElementsByClassName('graph-value')[0].innerHTML = newValue;
+        this.transformY = this.mapBetween(newValue,0,100,this.min,this.max)
     }
     
     set transformY(newTransform) {
@@ -36,8 +36,8 @@ class Graph {
     }
 
     render() {
-        return `<span class="graph-value">${this.graphValue}</span>
-                <div class='graph' style="${this.style}" id="${this.id}">
+        return `<div class='graph' style="${this.style}" id="${this.id}">
+                    <span class="d-block section-value t-center graph-value"></span>
                     <span class="graph-fill" style="background-color: ${this.color}; ${this.style}; transform: scaleY(0%)"></span>
                 </div>
                 <span class="graph-title">${this.title}</span>`;
