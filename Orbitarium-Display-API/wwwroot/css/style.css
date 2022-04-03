@@ -1,7 +1,7 @@
 ﻿.grid-horizontal {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 .grid-horizontal section {
     overflow: hidden;
@@ -10,8 +10,20 @@
     flex-direction: column;
     padding: 10px;
 }
+section#year {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: monospace;
+}
+section {
+    background: white;
+}
 .d-block {
     display: block;
+}
+.d-none {
+    display: none;
 }
 .section-title {
     font-size: 3em;
@@ -21,4 +33,26 @@
 }
 .t-center {
     text-align: center;
+}
+img {
+    max-width:80%;
+}
+.status-bar {
+    display: flex;
+    flex-direction: column;
+    height: 45px;
+}
+.error {
+    background: #d34d4e;
+    color: white;
+    margin: 0;
+    padding: 10px;
+}
+.scale-on-hover {
+    transition: 0.5s ease-in-out; 
+}
+.scale-on-hover:hover {
+    z-index: 999999;
+    transform: scale(1.5);
+    transform-origin: top right;
 }

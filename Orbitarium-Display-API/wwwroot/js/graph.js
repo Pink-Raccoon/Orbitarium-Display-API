@@ -1,8 +1,7 @@
 ﻿'use strict';
 
-// TODO: graphValue somehow is write-only??
 class Graph {
-    constructor(height, width, color, rangeMin, rangeMax, title) {
+    constructor(height, width, color, rangeMin, rangeMax, title, unit = '', labels = []) {
         this.height = height;
         this.width = width;
         this.color = color;
@@ -12,6 +11,19 @@ class Graph {
         this.id = this.generateId(title);
         this.graphValue = this.min;
         this.transformY = 0;
+        this.unit = unit;
+        this.labels = labels;
+        
+        console.log(this.genLabels())
+    }
+    
+    set graphValue(newValue) {
+        if (document.getElementById(this.id)) document.getElementById(`${this.id}-value`).innerHTML = `${newValue} ${this.unit}`;
+        this.transformY = this.getPercentageFromBottom(newValue);
+    }
+    
+    set transformY(newTransform) {
+        if (document.getElementById(this.id)) document.getElementById(this.id).getElementsByClassName('graph-fill')[0].style.transform = `scaleY(${newTransform}%)`;
     }
 
     get style() {
@@ -22,22 +34,24 @@ class Graph {
         return newTitle.replace(/[^A-Z0-9]+/ig, "_").toLowerCase() + '-graph';
     }
 
-    mapBetween(currentNum, minAllowed, maxAllowed, min, max) {
-        return (maxAllowed - minAllowed) * (currentNum- min) / (max - min) + minAllowed;
+    getPercentageFromBottom(currentNum) {
+        return 100 * (currentNum- this.min) / (this.max - this.min);
     }
 
-    set graphValue(newValue) {
-        if (document.getElementById(this.id)) document.getElementById(this.id).getElementsByClassName('graph-value')[0].innerHTML = newValue;
-        this.transformY = this.mapBetween(newValue,0,100,this.min,this.max)
+    getPercentageFromTop(currentNum) {
+        return 100 - this.getPercentageFromBottom(currentNum);
     }
-    
-    set transformY(newTransform) {
-        if (document.getElementById(this.id)) document.getElementById(this.id).getElementsByClassName('graph-fill')[0].style.transform = `scaleY(${newTransform}%)`;
-    }
+
+    genLabels() {
+        return this.labels.map( (label => `<li style="top: ${this.getPercentageFromTop(label)}%">${label} ${this.unit}</li>`)).join('');
+    }   
 
     render() {
-        return `<div class='graph' style="${this.style}" id="${this.id}">
-                    <span class="d-block section-value t-center graph-value"></span>
+        return `<span class="d-block t-center graph-value" id="${this.id}-value"></span>
+                <div class='graph' style="${this.style}" id="${this.id}">
+                    <ul class="graph-labels" style="height: ${this.height}">
+                        ${ this.genLabels() }
+                    </ul>
                     <span class="graph-fill" style="background-color: ${this.color}; ${this.style}; transform: scaleY(0%)"></span>
                 </div>
                 <span class="graph-title">${this.title}</span>`;

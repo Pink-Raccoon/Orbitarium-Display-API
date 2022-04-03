@@ -1,14 +1,32 @@
 ﻿.graph {
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    overflow: hidden;
+    position: relative;
+    border-left: 1px solid #b4b4b4;
+    border-bottom: 1px solid #b4b4b4;
 }
 .graph-fill {
     display: inline-flex;
     position: relative;
     transform-origin: bottom;    
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
 }
-.graph-title {
-    
+.graph-value {
+    font-size: 2em;
+}
+.graph-labels {
+    position: absolute;
+    list-style-type: none;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+.graph-labels li {
+    position: absolute;
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.5em;
+    border-top: 1px dashed rgba(0, 0, 0, 0.2);
+    width: 100%;
 }

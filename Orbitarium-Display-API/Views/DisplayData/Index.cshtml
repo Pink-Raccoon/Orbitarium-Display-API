@@ -15,31 +15,23 @@
         <script src="@Url.Content("~/js/graph.js")"></script>
         <script src="@Url.Content("~/js/index.js")"></script>
     </head>
-    <body>
-    <h1>Display Data</h1>
-
-    @if (ViewBag.Valid)
-    {
-        <div class="grid-horizontal">
-            <section id="year">
-                <span class="d-block section-value t-center">
-                    @ViewBag.Year AD
-                </span>
-            </section>
-            <section id="population-under-water">
-            </section>
-            <section id="temperature">
-            </section>
-            <section id="co2">
-            </section>
-            <section id="sealevel">
-            </section>
-        </div>
-        
-    }
-    else
-    {
-        <h2>No data</h2>
-    }
-    </body>
+<body>
+<div class="status-bar">
+    <p class="error t-center d-none">Cannot fetch data from API</p>
+</div>
+<div class="grid-horizontal">
+    <section id="year">
+        <img src="@Url.Content("~/img/ZHAW_Logo.svg.png")" alt="Logo ZHAW"/>
+        <span class="d-block section-value t-center">Year</span>
+    </section>
+    <section class="scale-on-hover" id="population-under-water">
+    </section>
+    <section class="scale-on-hover" id="temperature">
+    </section>
+    <section class="scale-on-hover" id="co2">
+    </section>
+    <section class="scale-on-hover" id="sealevel">
+    </section>
+</div>
+</body>
 </html>
