@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     
     let yearDOMElement = document.getElementById("year").getElementsByClassName('section-value')[0];
     
-    const co2 = new Graph(HEIGHT, WIDTH, "#ceffcf", 0, 1000, "CO2", 'ppm', [0,200, 400, 600, 800, 1000]);
-    const temperature = new Graph(HEIGHT, WIDTH, "#fffebb", 0, 30, "Global Mean Temperature", '°C', [0, 10, 20, 30]);
-    const seaLevel = new Graph(HEIGHT, WIDTH, "#b6cdff", -120, 80, "Sea Level", 'm', [-120, -60, 0, 80]);
+    const co2 = new Graph(HEIGHT, WIDTH, "#ceffcf", 0, 1000, "CO2", 'ppm', [0,200, 400, 600, 800, 1000], 412.5);
+    const temperature = new Graph(HEIGHT, WIDTH, "#fffebb", 0, 30, "Global Mean Temperature", '°C', [0, 10, 20, 30], 13.9);
+    const seaLevel = new Graph(HEIGHT, WIDTH, "#b6cdff", -120, 80, "Sea Level", 'm', [-120, -60, 0, 80], 0.091);
     const popUnderWater = new Graph(HEIGHT, WIDTH, "#ffb6fe", 0, 20000, "Population Under Water", '', [0, 5000, 10000,15000,20000]);
     
     document.getElementById("co2").insertAdjacentHTML("beforeend", co2.render());

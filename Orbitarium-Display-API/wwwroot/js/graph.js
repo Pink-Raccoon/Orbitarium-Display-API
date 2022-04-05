@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 class Graph {
-    constructor(height, width, color, rangeMin, rangeMax, title, unit = '', labels = []) {
+    constructor(height, width, color, rangeMin, rangeMax, title, unit = '', labels = [], currentValue = null) {
         this.height = height;
         this.width = width;
         this.color = color;
@@ -13,8 +13,7 @@ class Graph {
         this.transformY = 0;
         this.unit = unit;
         this.labels = labels;
-        
-        console.log(this.genLabels())
+        this.currentValue = currentValue;        
     }
     
     set graphValue(newValue) {
@@ -42,15 +41,17 @@ class Graph {
         return 100 - this.getPercentageFromBottom(currentNum);
     }
 
-    genLabels() {
-        return this.labels.map( (label => `<li style="top: ${this.getPercentageFromTop(label)}%">${label} ${this.unit}</li>`)).join('');
+    generateLabels() {
+        const yLabels = this.labels.map( (label => `<li style="top: ${this.getPercentageFromTop(label)}%">${label} ${this.unit}</li>`));
+        if(this.currentValue != null) yLabels.push( `<li class="currentValue" style="top: ${this.getPercentageFromTop(this.currentValue)}%">${this.currentValue} ${this.unit}</li>` );
+        return yLabels.join('');
     }   
 
     render() {
         return `<span class="d-block t-center graph-value" id="${this.id}-value"></span>
                 <div class='graph' style="${this.style}" id="${this.id}">
                     <ul class="graph-labels" style="height: ${this.height}">
-                        ${ this.genLabels() }
+                        ${ this.generateLabels() }
                     </ul>
                     <span class="graph-fill" style="background-color: ${this.color}; ${this.style}; transform: scaleY(0%)"></span>
                 </div>

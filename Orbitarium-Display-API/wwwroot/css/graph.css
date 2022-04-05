@@ -8,6 +8,7 @@
     position: relative;
     transform-origin: bottom;    
     transition: .2s ease-in-out;
+    border-top: 1px solid #cecece;
 }
 .graph-value {
     font-size: 2em;
@@ -29,6 +30,13 @@
     line-height: 1.5em;
     border-top: 1px dashed rgba(0, 0, 0, 0.2);
     width: 100%;
+}
+.graph-labels li.currentValue {
+    border-color: maroon;
+    border-width: 2px;
+    color: maroon;
+    font-weight: bold;
+    text-align: center;
 }
 @media screen and (max-width: 1380px) {
     .graph-value {
