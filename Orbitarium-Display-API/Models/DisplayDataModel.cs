@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Orbitarium_Display_API.Models
@@ -6,6 +7,7 @@ namespace Orbitarium_Display_API.Models
     public class DisplayData
     {
         [Key]
+        [JsonIgnore]
         public int id { get; set; }
         public Int64 PopulationUnderWater { get; set; }
         public float TemperatureC { get; set; }

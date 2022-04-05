@@ -18,6 +18,7 @@ section#year {
 }
 section {
     background: white;
+    min-height: 400px;
 }
 .d-block {
     display: block;
@@ -51,8 +52,10 @@ img {
 .scale-on-hover {
     transition: 0.5s ease-in-out; 
 }
+/*
 .scale-on-hover:hover {
     z-index: 999999;
     transform: scale(1.5);
     transform-origin: top right;
 }
+ */

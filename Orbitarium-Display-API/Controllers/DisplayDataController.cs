@@ -17,6 +17,9 @@ public class DisplayDataController : Controller
     }
 
     
+    /// <summary>
+    /// Reads display data
+    /// </summary>
     [HttpGet(Name = "GetDisplayData")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public DisplayData? Get()
@@ -32,9 +35,13 @@ public class DisplayDataController : Controller
         }
     }
     
-    
+    /// <summary>
+    /// Writes display data
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns>Returns Accepted</returns>
     [HttpPost(Name = "PostTemperature")]
-    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(DisplayData data)
     {
         _context.DisplayDataSet.Add(data);
@@ -42,6 +49,9 @@ public class DisplayDataController : Controller
         return Accepted(data);
     }
     
+    /// <summary>
+    /// Gets the website
+    /// </summary>
     [HttpGet]
     public IActionResult Index()
     {
@@ -62,6 +72,7 @@ public class DisplayDataController : Controller
         return View();
     }
 
+    [HttpGet(Name = "Website")]
     private DisplayData? GetLast()
     {
         try
