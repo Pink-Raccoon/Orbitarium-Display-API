@@ -26,7 +26,7 @@ public class DisplayDataController : Controller
     {
         try
         {
-            return _context.DisplayDataSet.Last();
+            return _context.Last();
         }
         catch (Exception e)
         {
@@ -39,7 +39,7 @@ public class DisplayDataController : Controller
     /// Writes display data
     /// </summary>
     /// <param name="data"></param>
-    /// <returns>Returns Accepted</returns>
+    /// <returns>Returns the saved DisplayData</returns>
     [HttpPost(Name = "PostTemperature")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(DisplayData data)
@@ -52,38 +52,11 @@ public class DisplayDataController : Controller
     /// <summary>
     /// Gets the website
     /// </summary>
+    /// <returns>Returns the index page</returns>
     [HttpGet]
-    public IActionResult Index()
+    [Route("/[controller]/")]
+    public ViewResult Index()
     {
-        try
-        {
-            ViewBag.PopulationUnderWater = GetLast()?.PopulationUnderWater ?? 0;
-            ViewBag.TemperatureC = GetLast()?.TemperatureC ?? 0;
-            ViewBag.Year = GetLast()?.Year ?? 0;
-            ViewBag.CO2ppm = GetLast()?.Co2ppm ?? 0;
-            ViewBag.SeaLevel = GetLast()?.SeaLevel ?? 0;
-            ViewBag.Valid = true;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
         return View();
-    }
-
-    [HttpGet(Name = "Website")]
-    private DisplayData? GetLast()
-    {
-        try
-        {
-            return _context.DisplayDataSet.LastOrDefault();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return null;
-        }
-        
     }
 }
