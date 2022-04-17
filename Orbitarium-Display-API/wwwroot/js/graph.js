@@ -29,6 +29,15 @@ class Graph {
         return `height: ${this.height}; width: ${this.width}`;
     }
     
+    get labels() {
+        return this._labels;
+    }
+    
+    set labels(newValue) {
+        this._labels = newValue;
+        this.generateLabels()
+    }
+    
     generateId(newTitle) {
         return newTitle.replace(/[^A-Z0-9]+/ig, "_").toLowerCase() + '-graph';
     }
@@ -41,18 +50,20 @@ class Graph {
         return 100 - this.getPercentageFromBottom(currentNum);
     }
 
-    generateLabels() {
+    generateLabels() {        
         const yLabels = this.labels.map( (label => `<li style="top: ${this.getPercentageFromTop(label)}%">${label} ${this.unit}</li>`));
-        if(this.currentValue != null) yLabels.push( `<li class="currentValue" style="top: ${this.getPercentageFromTop(this.currentValue)}%">${this.currentValue} ${this.unit}</li>` );
-        return yLabels.join('');
+        if(this.currentValue != null) {
+            yLabels.push(`<li class="currentValue" style="top: ${this.getPercentageFromTop(this.currentValue)}%">${this.currentValue} ${this.unit}</li>`);
+        }
+        if(document.getElementById(this.id) != null) {
+            document.getElementById(this.id).getElementsByClassName('graph-labels')[0].innerHTML = yLabels.join('');
+        }
     }   
 
     render() {
         return `<span class="d-block t-center graph-value" id="${this.id}-value"></span>
                 <div class='graph' style="${this.style}" id="${this.id}">
-                    <ul class="graph-labels" style="height: ${this.height}">
-                        ${ this.generateLabels() }
-                    </ul>
+                    <ul class="graph-labels" style="height: ${this.height}"></ul>
                     <span class="graph-fill" style="background-color: ${this.color}; ${this.style}; transform: scaleY(0%)"></span>
                 </div>
                 <span class="graph-title">${this.title}</span>`;

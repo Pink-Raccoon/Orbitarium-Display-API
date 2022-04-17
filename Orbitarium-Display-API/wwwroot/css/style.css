@@ -14,7 +14,6 @@ section#year {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-family: monospace;
 }
 section {
     background: white;
@@ -31,6 +30,7 @@ section {
 }
 .section-value {
     font-size: 2em;
+    font-weight: bolder;
 }
 .t-center {
     text-align: center;
@@ -49,13 +49,3 @@ img {
     margin: 0;
     padding: 10px;
 }
-.scale-on-hover {
-    transition: 0.5s ease-in-out; 
-}
-/*
-.scale-on-hover:hover {
-    z-index: 999999;
-    transform: scale(1.5);
-    transform-origin: top right;
-}
- */

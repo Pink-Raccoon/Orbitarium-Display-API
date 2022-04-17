@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using Orbitarium_Display_API.Models;
 
 namespace Orbitarium_Display_API.Controllers;
@@ -26,6 +27,7 @@ public class DisplayDataController : Controller
     {
         try
         {
+            Console.WriteLine(_context.Last().ToJson());
             return _context.Last();
         }
         catch (Exception e)
@@ -40,7 +42,7 @@ public class DisplayDataController : Controller
     /// </summary>
     /// <param name="data"></param>
     /// <returns>Returns the saved DisplayData</returns>
-    [HttpPost(Name = "PostTemperature")]
+    [HttpPost(Name = "PostDisplayData")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(DisplayData data)
     {
