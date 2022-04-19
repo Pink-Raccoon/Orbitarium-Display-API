@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     yearDOMElement = document.getElementById("year").getElementsByClassName('section-value')[0];
     
     co2 = new Graph(HEIGHT, WIDTH, "#ceffcf", 0, 1000, "CO2", 'ppm', [0,200, 400, 600, 800, 1000], 412.5);
-    temperature = new Graph(HEIGHT, WIDTH, "#fffebb", 0, 40, "Global Mean Temperature", '°C', [0, 10, 20, 40], 13.9);
+    temperature = new Graph(HEIGHT, WIDTH, "#fffebb", 0, 40, "Global Mean Temperature", '°C', [0, 10, 20, 30, 40], 13.9);
     seaLevel = new Graph(HEIGHT, WIDTH, "#b6cdff", -120, 80, "Sea Level", 'm', [-120, -60, 0, 80], 0.091);
     popUnderWater = new Graph(HEIGHT, WIDTH, "#ffb6fe", 0, 20, "Population Under Water", 'mil', [0,5,10,15,20], 10);
     
@@ -52,14 +52,15 @@ function fetchData() {
             popUnderWater.graphValue = displayData.populationUnderWater;
             
             popUnderWater.max = displayData.population;
-            /*
-            TODO: Dynamic labels --> This code causes memory leak error        
-            const popLabels = [0];
-            for (let i = (displayData.population/5); i <= displayData.population; i += (displayData.population/5)) {
-                popLabels.push(Math.round(i * 100) / 100);
-            }            
-            popUnderWater.labels = popLabels;
-            */
+            
+            // TODO: Dynamic labels with for-loop lead to memory leak
+            const popLabel1 = 0;
+            const popLabel2 = Math.round(displayData.population/4  * 100) / 100;
+            const popLabel3 = 2 * Math.round(displayData.population/4  * 100) / 100;
+            const popLabel4 = 3 * Math.round(displayData.population/4  * 100) / 100;
+            const popLabel5 = 4 * Math.round(displayData.population/4  * 100) / 100;
+            
+            popUnderWater.labels = [popLabel1, popLabel2, popLabel3, popLabel4, popLabel5];
             
 
             dataValid = true;
