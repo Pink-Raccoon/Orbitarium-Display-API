@@ -52,16 +52,11 @@ function fetchData() {
             popUnderWater.graphValue = displayData.populationUnderWater;
             
             popUnderWater.max = displayData.population;
-            
-            // TODO: Dynamic labels with for-loop lead to memory leak
-            const popLabel1 = 0;
-            const popLabel2 = Math.round(displayData.population/4  * 100) / 100;
-            const popLabel3 = 2 * Math.round(displayData.population/4  * 100) / 100;
-            const popLabel4 = 3 * Math.round(displayData.population/4  * 100) / 100;
-            const popLabel5 = 4 * Math.round(displayData.population/4  * 100) / 100;
-            
-            popUnderWater.labels = [popLabel1, popLabel2, popLabel3, popLabel4, popLabel5];
-            
+            const popLabels = []
+            for( let i = 0, firstLabel = 0; i <= 4; i++, firstLabel += Math.round(displayData.population/4  * 100) / 100) {
+                popLabels.push(firstLabel);
+            }
+            popUnderWater.labels = popLabels;
 
             dataValid = true;
         })
