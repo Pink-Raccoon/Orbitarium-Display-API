@@ -44,11 +44,15 @@
     font-weight: bold;
     text-align: center;
 }
+.graph-title {
+    z-index: 999999;
+}
 @media screen and (max-width: 1380px) {
     .graph-value {
         margin-bottom: 30px;
     }
     .graph-title {
+        z-index: 999999;
         margin-top: 30px;
     }
 }
