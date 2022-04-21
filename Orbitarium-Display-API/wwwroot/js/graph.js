@@ -38,6 +38,15 @@ class Graph {
         this.generateLabels()
     }
     
+    get currentValue() {
+        return this._currentValue;
+    }
+    
+    set currentValue(newValue) {
+        this._currentValue = newValue;
+        this.generateLabels();
+    }
+    
     generateId(newTitle) {
         return newTitle.replace(/[^A-Z0-9]+/ig, "_").toLowerCase() + '-graph';
     }
