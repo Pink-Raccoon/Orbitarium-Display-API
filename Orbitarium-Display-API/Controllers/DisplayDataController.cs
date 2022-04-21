@@ -19,21 +19,23 @@ public class DisplayDataController : Controller
 
     
     /// <summary>
-    /// Reads display data
+    /// Reads newest display data
     /// </summary>
+    /// <response code="200">Returns the newest DisplayData</response>
+    /// <response code="204">Returns empty 204</response>
     [HttpGet(Name = "GetDisplayData")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public DisplayData? Get()
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public ActionResult<DisplayData?> Get()
     {
         try
         {
-            Console.WriteLine(_context.Last().ToJson());
             return _context.Last();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return null;
+            return NoContent();
         }
     }
     
@@ -42,6 +44,21 @@ public class DisplayDataController : Controller
     /// </summary>
     /// <param name="data"></param>
     /// <returns>Returns the saved DisplayData</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /DisplayData/Post
+    ///     {
+    ///         "Population":7795,
+    ///         "PopulationUnderWater":10,
+    ///         "TemperatureC":14.0,
+    ///         "SeaLevel":0.0,
+    ///         "Co2ppm":280,
+    ///         "Year":1870
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the saved DisplayData</response>
     [HttpPost(Name = "PostDisplayData")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Post(DisplayData data)
@@ -54,7 +71,7 @@ public class DisplayDataController : Controller
     /// <summary>
     /// Gets the website
     /// </summary>
-    /// <returns>Returns the index page</returns>
+    /// <response code="200">Returns the DisplayData webpage</response>
     [HttpGet]
     [Route("/[controller]/")]
     public ViewResult Index()
